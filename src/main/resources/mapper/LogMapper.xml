@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.lin.entity.Log" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="old_name" property="oldName" jdbcType="VARCHAR" />
+    <result column="new_name" property="newName" jdbcType="VARCHAR" />
+    <result column="old_pwd" property="oldPwd" jdbcType="VARCHAR" />
+    <result column="new_pwd" property="newPwd" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="target_id" property="targetId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, old_name, new_name, old_pwd, new_pwd, operator, time, target_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lin.entity.Log" >
+    insert into log (id, old_name, new_name, 
+      old_pwd, new_pwd, operator, 
+      time, target_id)
+    values (#{id,jdbcType=INTEGER}, #{oldName,jdbcType=VARCHAR}, #{newName,jdbcType=VARCHAR}, 
+      #{oldPwd,jdbcType=VARCHAR}, #{newPwd,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{targetId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lin.entity.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="oldName != null" >
+        old_name,
+      </if>
+      <if test="newName != null" >
+        new_name,
+      </if>
+      <if test="oldPwd != null" >
+        old_pwd,
+      </if>
+      <if test="newPwd != null" >
+        new_pwd,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oldName != null" >
+        #{oldName,jdbcType=VARCHAR},
+      </if>
+      <if test="newName != null" >
+        #{newName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPwd != null" >
+        #{oldPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="newPwd != null" >
+        #{newPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lin.entity.Log" >
+    update log
+    <set >
+      <if test="oldName != null" >
+        old_name = #{oldName,jdbcType=VARCHAR},
+      </if>
+      <if test="newName != null" >
+        new_name = #{newName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldPwd != null" >
+        old_pwd = #{oldPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="newPwd != null" >
+        new_pwd = #{newPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lin.entity.Log" >
+    update log
+    set old_name = #{oldName,jdbcType=VARCHAR},
+      new_name = #{newName,jdbcType=VARCHAR},
+      old_pwd = #{oldPwd,jdbcType=VARCHAR},
+      new_pwd = #{newPwd,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      target_id = #{targetId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

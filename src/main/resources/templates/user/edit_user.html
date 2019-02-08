@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{../static/css/layui.css}" />
+    <link rel="stylesheet" th:href="@{../static/css/style.css}" />
+    <script th:src="@{../static/js/jquery.min.js}"></script>
+    <script th:src="@{../static/js/layui.js}"></script>
+</head>
+<body>
+<!--弹出层编辑表单页面-->
+<div class="layui-row" id="ass" >
+    <div class="layui-col-md10">
+
+
+        <!--layui-from-pane-->
+        <form class="layui-form" action="" style="margin-top:20px"  lay-filter="formTestFilter">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-block">
+                    <input type="text" name="neweqptIdCode" id="user-id" required=""
+                           lay-verify="required" autocomplete="off" placeholder="" class="layui-input" readonly=""/>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="neweqptIdCode" id="user-name" required=""
+                           lay-verify="required" autocomplete="off" placeholder="" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input id="user-password" type="text" name="neweqptName"  required=""  lay-verify="required"
+                           autocomplete="off" placeholder="" class="layui-input"/>
+                </div>
+            </div>
+
+
+
+            <div class="layui-form-item" style="margin-top:40px">
+                <div class="layui-input-block">
+                    <button id="update-btn" type="button" class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="demo11">确认修改</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
+<script th:src="@{../static/my/edit_user.js}"></script>
+<script>
+    function get() {
+        var id = $('#user-id').val();
+        if (id != ''){
+            $.ajax({
+                url:'/u/getOldUser',
+                type:'post',
+                dataType:'json',
+                async: false,//保证ajax执行后才往下执行
+                data:{id:id},
+                //验证用户名是否可用
+                success:function(data){
+                    clearInterval(Auto);
+                }
+            });
+
+        }
+    }
+    Auto=window.setInterval(get,100);
+</script>
+
+</body>
+</html>

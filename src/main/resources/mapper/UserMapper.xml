@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.mapper.UserMapper">
+    <!--根据id查询用户详情-->
+    <select id="findById" parameterType="int" resultType="User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="User">
+        SELECT * FROM user WHERE name = #{name}
+    </select>
+
+    <select id="getAllUsers"  resultType="User">
+        SELECT * FROM user
+    </select>
+
+    <insert id="saveUser" parameterType="User" >
+        INSERT INTO user(name,password) VALUES (#{name},#{password})
+
+    </insert>
+
+    <update id="updateUser" parameterType="User" >
+        UPDATE user SET name = #{name},password = #{password} where id = #{id}
+
+    </update>
+    
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+             DELETE FROM user WHERE id = #{id}
+    </delete>
+
+</mapper>
